@@ -4,12 +4,12 @@ public class Celular {
     Long id;
     Marca marca;
     String modelo;
-    Precio precio;
+    Double precio;
     Long stock;
     SistemaOperativo so;
     Gama gama;
 
-    public Celular(Long id, Marca marca, String modelo, Precio precio, Long stock, SistemaOperativo so, Gama gama) {
+    public Celular(Long id, Marca marca, String modelo, Double precio, Long stock, SistemaOperativo so, Gama gama) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -19,7 +19,7 @@ public class Celular {
         this.gama = gama;
     }
 
-    public Celular(Marca marca, String modelo, Precio precio, Long stock, SistemaOperativo so, Gama gama) {
+    public Celular(Marca marca, String modelo, Double precio, Long stock, SistemaOperativo so, Gama gama) {
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
@@ -52,11 +52,11 @@ public class Celular {
         this.modelo = modelo;
     }
 
-    public Precio getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Precio precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
