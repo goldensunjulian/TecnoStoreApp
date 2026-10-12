@@ -1,5 +1,5 @@
 package modelo.validaciones;
 
 public interface validacionInterface<T> {
-    T validacion(String mensaje);
+   T validacion(String mensaje);
 }

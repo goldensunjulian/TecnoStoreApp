@@ -51,5 +51,11 @@ public class Auditoria {
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
     
 }
