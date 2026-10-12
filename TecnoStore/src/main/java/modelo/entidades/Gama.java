@@ -28,4 +28,12 @@ public class Gama {
         this.nombre = nombre;
     }
     
+        @Override
+    public String toString() {
+        return """
+               Id:      %s
+               Nombre:  %s
+               """.formatted(id, nombre);
+    }
+    
 }

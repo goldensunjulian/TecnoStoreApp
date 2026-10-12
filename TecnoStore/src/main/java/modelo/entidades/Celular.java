@@ -84,5 +84,16 @@ public class Celular {
         this.gama = gama;
     }
     
-    
+        @Override
+    public String toString() {
+        return """
+               Id:                  %s
+               Marca:               %s
+               Modelo:              %s
+               Precio:              $%s
+               Stock:               %s
+               Sistema Operativo:   %s
+               Gama:                %s
+               """.formatted(id, marca.getNombre(), modelo, String.format("%.2f", precio), stock, so.getNombre(), gama.getNombre());
+    }
 }

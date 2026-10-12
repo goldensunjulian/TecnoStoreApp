@@ -79,5 +79,16 @@ public class DetalleVenta {
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
+ 
+        @Override
+    public String toString() {
+        return """
+               Celular:     %s %s
+               Cantidad:    %s
+               Precio unit: $%s
+               Subtotal:    $%s
+               """.formatted(celular.getMarca().getNombre(), celular.getModelo(), cantidad, 
+                             String.format("%.2f", precioUnitario), String.format("%.2f", subtotal));
+    }
     
 }

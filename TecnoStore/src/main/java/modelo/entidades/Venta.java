@@ -81,4 +81,16 @@ public class Venta {
     public void setFecha(LocalDateTime fecha){
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return """
+               Id:          %s
+               Cliente:     %s
+               Empleado:    %s
+               Total:       $%s
+               Fecha:       %s
+               """.formatted(id, cliente.getNombre(), empleado.getNombre(), 
+                             String.format("%.2f", total), fecha);
+    }
 }

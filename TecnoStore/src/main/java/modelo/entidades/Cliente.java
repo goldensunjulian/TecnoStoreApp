@@ -15,4 +15,15 @@ public class Cliente extends Persona {
         super(nombre, identificador, correo, telefono);
     }
 
+    
+        @Override
+    public String toString() {
+        return """
+               Id:              %s
+               Nombre:          %s
+               Identificador:   %s
+               Correo:          %s
+               Telefono:        %s
+               """.formatted(id, nombre, identificador, correo, telefono);
+    }
 }

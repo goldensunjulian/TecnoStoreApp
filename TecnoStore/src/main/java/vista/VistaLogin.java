@@ -14,7 +14,7 @@ public class VistaLogin {
     }
 
     public String pedirPassword() {
-        return valClave.validacion("Contraseña: ");
+        return valClave.validacion("Password: ");
     }
 
     public void mostrarErrorCredenciales() {

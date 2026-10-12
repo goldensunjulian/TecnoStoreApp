@@ -54,4 +54,17 @@ public class Empleado extends Persona {
     public void setContraseña(String contraseña){
         this.contraseña = contraseña;
     }
+    
+    
+        @Override
+    public String toString() {
+        return """
+               Id:              %s
+               Nombre:          %s
+               Identificador:   %s
+               Correo:          %s
+               Telefono:        %s
+               Rol:             %s
+               """.formatted(id, nombre, identificador, correo, telefono, rol.getRol());
+    }
 }

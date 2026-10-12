@@ -61,6 +61,15 @@ public class Persona {
         this.telefono = telefono;
     }
     
-    
+        @Override
+    public String toString() {
+        return """
+               Id:              %s
+               Nombre:          %s
+               Identificador:   %s
+               Correo:          %s
+               Telefono:        %s
+               """.formatted(id, nombre, identificador, correo, telefono);
+    }
     
 }

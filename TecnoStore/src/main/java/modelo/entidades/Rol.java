@@ -39,5 +39,12 @@ public class Rol {
         this.privilegios = privilegios;
     }
     
-    
+        @Override
+    public String toString() {
+        return """
+               Id:          %s
+               Rol:         %s
+               Privilegios: %s
+               """.formatted(id, rol, privilegios);
+    }
 }

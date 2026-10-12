@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.tecnostore;
 
-/**
- *
- * @author trist
- */
+import controlador.GestionGeneral;
+
 public class TecnoStore {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        GestionGeneral g = new GestionGeneral();
+        g.menuGeneral();
     }
 }

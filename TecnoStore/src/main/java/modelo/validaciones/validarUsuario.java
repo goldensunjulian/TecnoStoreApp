@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class validarUsuario implements validacionInterface<String> {
 
-    private static final int MIN = 4;
+    private static final int MIN = 3;
     private static final int MAX = 45;
 
     @Override
