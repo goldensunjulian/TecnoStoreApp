@@ -65,6 +65,6 @@ public class Empleado extends Persona {
                Correo:          %s
                Telefono:        %s
                Rol:             %s
-               """.formatted(id, nombre, identificador, correo, telefono, rol.getRol());
+               """.formatted(getId(), getNombre(), getIdentificador(), getCorreo(), getTelefono(), rol.getRol());
     }
 }

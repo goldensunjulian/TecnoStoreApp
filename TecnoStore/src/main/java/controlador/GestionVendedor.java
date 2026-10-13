@@ -15,6 +15,7 @@ import modelo.entidades.DetalleVenta;
 import modelo.entidades.Empleado;
 import modelo.entidades.Persona;
 import modelo.entidades.Venta;
+import modelo.excepciones.StockInsuficienteException;
 import vista.Ingreso;
 import vista.MostrarCelular;
 
@@ -145,16 +146,25 @@ public class GestionVendedor {
 
         if (celular == null) {
             System.out.println("Celular no encontrado.");
-        } else if (celular.getStock() == 0) {
-            System.out.println("Sin stock disponible.");
-        } else {
+            return;
+        }
+
+        try {
+            if (celular.getStock() == 0) {
+                throw new StockInsuficienteException(
+                        celular.getMarca().getNombre() + " " + celular.getModelo(),
+                        celular.getStock(), 1L);
+            }
             Long cantidad = ingreso.pedirCantidad();
             if (cantidad > celular.getStock()) {
-                System.out.println("Stock insuficiente. Disponible: " + celular.getStock());
-            } else {
-                carrito.add(new DetalleVenta(celular, cantidad, celular.getPrecio()));
-                System.out.println("Agregado al carrito.");
+                throw new StockInsuficienteException(
+                        celular.getMarca().getNombre() + " " + celular.getModelo(),
+                        celular.getStock(), cantidad);
             }
+            carrito.add(new DetalleVenta(celular, cantidad, celular.getPrecio()));
+            System.out.println("Agregado al carrito.");
+        } catch (StockInsuficienteException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 

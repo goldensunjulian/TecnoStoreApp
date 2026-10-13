@@ -1,13 +1,13 @@
 package modelo.entidades;
 
 public class Celular {
-    Long id;
-    Marca marca;
-    String modelo;
-    Double precio;
-    Long stock;
-    SistemaOperativo so;
-    Gama gama;
+    private Long id;
+    private Marca marca;
+    private String modelo;
+    private Double precio;
+    private Long stock;
+    private SistemaOperativo so;
+    private Gama gama;
 
     public Celular(Long id, Marca marca, String modelo, Double precio, Long stock, SistemaOperativo so, Gama gama) {
         this.id = id;

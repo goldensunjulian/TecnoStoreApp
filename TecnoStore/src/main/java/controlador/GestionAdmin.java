@@ -36,6 +36,8 @@ public class GestionAdmin {
     private final AuditoriaDao auditoriaDao     = new AuditoriaDao();
 
     private final Empleado empleado;
+    private final CelularDao celularDao         = new CelularDao();
+    private final DetallesVentaDao detalleDao   = new DetallesVentaDao();
 
     public GestionAdmin(Empleado empleado) {
         this.empleado = empleado;
@@ -48,10 +50,11 @@ public class GestionAdmin {
             switch (op) {
                 case 1 -> menuEmpleados();
                 case 2 -> verAuditoria();
-                case 3 -> generarReporte();
-                case 4 -> System.out.println("Cerrando sesion...");
+                case 3 -> mostrarReportesConsola();
+                case 4 -> generarReporte();
+                case 5 -> System.out.println("Cerrando sesion...");
             }
-        } while (op != 4);
+        } while (op != 5);
     }
 
     // seccion para gestionar empleados 
@@ -148,6 +151,46 @@ public class GestionAdmin {
             auditoria.forEach(System.out::println);
         }
         auditoriaDao.agregar(new Auditoria("Admin consulto el registro de auditoria", empleado));
+    }
+
+    // reportes en consola usando Stream API
+
+    private void mostrarReportesConsola() {
+        // --- Stock bajo ---
+        System.out.println("=== Celulares con stock bajo (menos de 5 unidades) ===");
+        List<Celular> bajoStock = ReporteUtils.stockBajo(celularDao.listarTodo());
+        if (bajoStock.isEmpty()) {
+            System.out.println("Todos los celulares tienen stock suficiente.");
+        } else {
+            bajoStock.forEach(System.out::println);
+        }
+
+        // --- Top 3 más vendidos ---
+        System.out.println("=== Top 3 celulares mas vendidos ===");
+        List<DetalleVenta> detalles = detalleDao.listarTodo();
+        if (detalles.isEmpty()) {
+            System.out.println("No hay ventas registradas.");
+        } else {
+            List<Map.Entry<String, Long>> top3 = ReporteUtils.top3MasVendidos(detalles);
+            int posicion = 1;
+            for (Map.Entry<String, Long> entry : top3) {
+                System.out.println(posicion++ + ". " + entry.getKey() + " — " + entry.getValue() + " unidades vendidas");
+            }
+        }
+
+        // --- Ventas por mes ---
+        System.out.println("=== Ventas totales por mes ===");
+        List<Venta> ventas = ventaDao.listarTodo();
+        if (ventas.isEmpty()) {
+            System.out.println("No hay ventas registradas.");
+        } else {
+            Map<String, Double> porMes = ReporteUtils.ventasPorMes(ventas);
+            porMes.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(e -> System.out.println(e.getKey() + ": $" + String.format("%.2f", e.getValue())));
+        }
+
+        auditoriaDao.agregar(new Auditoria("Admin consulto reportes de analisis", empleado));
     }
 
     // cosa rancia del reporte

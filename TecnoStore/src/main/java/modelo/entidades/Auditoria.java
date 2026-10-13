@@ -3,10 +3,10 @@ package modelo.entidades;
 import java.time.LocalDateTime;
 
 public class Auditoria {
-    Long id;
-    String accion;
-    LocalDateTime fecha;
-    Empleado empleado;
+    private Long id;
+    private String accion;
+    private LocalDateTime fecha;
+    private Empleado empleado;
 
     public Auditoria(Long id, String accion, LocalDateTime fecha, Empleado empleado) {
         this.id = id;

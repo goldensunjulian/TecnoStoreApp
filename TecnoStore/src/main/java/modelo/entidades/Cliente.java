@@ -24,6 +24,6 @@ public class Cliente extends Persona {
                Identificador:   %s
                Correo:          %s
                Telefono:        %s
-               """.formatted(id, nombre, identificador, correo, telefono);
+               """.formatted(getId(), getNombre(), getIdentificador(), getCorreo(), getTelefono());
     }
 }

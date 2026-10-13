@@ -82,9 +82,10 @@ public class Ingreso {
         return valRango.validacion("""
                 1. Empleados
                 2. Ver auditoria
-                3. Generar reporte de ventas
-                4. Salir
-                Opcion: """, 1, 4);
+                3. Reportes de analisis
+                4. Generar reporte de ventas
+                5. Salir
+                Opcion: """, 1, 5);
     }
 
     public int menuEmpleados() {

@@ -1,8 +1,8 @@
 package modelo.entidades;
 public class Rol {
-    Long id;
-    String rol;
-    Long privilegios;
+    private Long id;
+    private String rol;
+    private Long privilegios;
 
     public Rol(Long id, String rol, Long privilegios) {
         this.id = id;

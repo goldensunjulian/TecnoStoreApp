@@ -1,7 +1,7 @@
 package modelo.entidades;
 public class Marca {
-    Long id;
-    String nombre;
+    private Long id;
+    private String nombre;
 
     public Marca(Long id, String nombre) {
         this.id = id;

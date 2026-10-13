@@ -1,7 +1,7 @@
 package modelo.entidades;
 public class Gama {
-    Long id;
-    String nombre;
+    private Long id;
+    private String nombre;
 
     public Gama(Long id, String nombre) {
         this.id = id;

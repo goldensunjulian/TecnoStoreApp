@@ -4,6 +4,8 @@ import dao.database.DetallesVentaDao;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import modelo.entidades.DetalleVenta;
 import modelo.entidades.Venta;
 
@@ -14,6 +16,12 @@ public class ArchivoUtils {
 
     // false en FileWriter sobreescribe el archivo si existe, lo crea si no
     public static void generarReporte(List<Venta> ventas) {
+        // traer todos los detalles en una sola query y agruparlos por ventaId
+        // evita el problema N+1 (una query extra por cada venta)
+        Map<Long, List<DetalleVenta>> detallesPorVenta = detalleDao.listarTodo()
+                .stream()
+                .collect(Collectors.groupingBy(d -> d.getVenta().getId()));
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(RUTA, false))) {
 
             bw.write("REPORTE DE VENTAS - TECNOSTORE");
@@ -32,7 +40,7 @@ public class ArchivoUtils {
                 bw.write("Total:    $" + String.format("%.2f", v.getTotal()));
                 bw.newLine();
 
-                List<DetalleVenta> detalles = detalleDao.listarPorVenta(v.getId());
+                List<DetalleVenta> detalles = detallesPorVenta.getOrDefault(v.getId(), List.of());
                 for (DetalleVenta d : detalles) {
                     bw.write("  - " + d.getCelular().getMarca().getNombre()
                             + " " + d.getCelular().getModelo()

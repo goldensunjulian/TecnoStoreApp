@@ -1,10 +1,10 @@
 package modelo.entidades;
 public class Persona {
-    Long id;
-    String nombre;
-    String identificador;
-    String correo;
-    String telefono;
+    private Long id;
+    private String nombre;
+    private String identificador;
+    private String correo;
+    private String telefono;
 
     public Persona(Long id, String nombre, String identificador, String correo, String telefono) {
         this.id = id;

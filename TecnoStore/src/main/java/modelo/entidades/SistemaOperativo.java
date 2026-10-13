@@ -1,7 +1,7 @@
 package modelo.entidades;
 public class SistemaOperativo {
-    Long id;
-    String nombre;
+    private Long id;
+    private String nombre;
 
     public SistemaOperativo(Long id, String nombre) {
         this.id = id;

@@ -1,11 +1,11 @@
 package modelo.entidades;
 public class DetalleVenta {
-    Long id;
-    Venta venta;
-    Celular celular;
-    Long cantidad;
-    Double precioUnitario;
-    Double subtotal;
+    private Long id;
+    private Venta venta;
+    private Celular celular;
+    private Long cantidad;
+    private Double precioUnitario;
+    private Double subtotal;
 
     //este es para recivir
     public DetalleVenta(Long id, Venta venta, Celular celular, Long cantidad, Double precioUnitario, Double subtotal) {
