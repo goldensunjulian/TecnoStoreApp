@@ -139,7 +139,7 @@ public class CelularDao implements InterfaceAgregar<Celular>, InterfaceActualiza
         }
     }
 
-    // metodo privado para no repetir la construccion del objeto en buscar y listar
+    // me evita repetir la armada en las otras consultas
     private Celular mapearCelular(ResultSet rs) throws Exception {
         Marca marca = new Marca(rs.getLong("marca_id"), rs.getString("marca_nombre"));
         SistemaOperativo so = new SistemaOperativo(rs.getLong("so_id"), rs.getString("so_nombre"));

@@ -15,16 +15,18 @@ import modelo.validaciones.validarRango;
 import modelo.validaciones.validarTexto;
 import modelo.validaciones.validarEntero;
 import modelo.validaciones.validarUsuario;
+import modelo.validaciones.validarTelefono;
 
 public class Ingreso {
 
-    private final validarTexto valTexto       = new validarTexto();
-    private final validarEntero valEntero     = new validarEntero();
-    private final validarDecimal valDecimal   = new validarDecimal();
-    private final validarCorreo valCorreo     = new validarCorreo();
-    private final validarClave valClave       = new validarClave();
-    private final validarUsuario valUsuario   = new validarUsuario();
-    private final validarRango valRango       = new validarRango();
+    private final validarTexto valTexto = new validarTexto();
+    private final validarEntero valEntero = new validarEntero();
+    private final validarDecimal valDecimal = new validarDecimal();
+    private final validarCorreo valCorreo = new validarCorreo();
+    private final validarClave valClave = new validarClave();
+    private final validarUsuario valUsuario = new validarUsuario();
+    private final validarRango valRango = new validarRango();
+    private final validarTelefono valTelefono = new validarTelefono();
 
     public int menuGeneral() {
         return valRango.validacion("""
@@ -98,7 +100,7 @@ public class Ingreso {
                 Opcion: """, 1, 5);
     }
 
-    // --- persona ---
+    // para cosas de persona
 
     public String pedirIdentificacion() {
         return valTexto.validacion("Identificacion: ");
@@ -107,7 +109,7 @@ public class Ingreso {
     public Persona ingresarPersona(String identificacion) {
         String nombre   = valTexto.validacion("Nombre: ");
         String correo   = valCorreo.validacion("Correo: ");
-        String telefono = valTexto.validacion("Telefono: ");
+        String telefono = valTelefono.validacion("Telefono: ");
         return new Persona(nombre, identificacion, correo, telefono);
     }
 
@@ -126,7 +128,7 @@ public class Ingreso {
         return persona;
     }
 
-    // --- empleado ---
+    // ingresar inforamcion tabla empleado
 
     public Empleado ingresarEmpleado(Persona persona, Rol rol) {
         String username = valUsuario.validacion("Username: ");
@@ -136,12 +138,12 @@ public class Ingreso {
                 persona.getNombre(), persona.getIdentificador(),
                 persona.getCorreo(), persona.getTelefono());
     }
-
+    // esto para cosas como eliminar o editar empleado
     public Long pedirIdEmpleado() {
         return valEntero.validacion("ID del empleado: ");
     }
 
-    // --- celular ---
+    // ingresar el celular
 
     public Celular ingresarCelular(Marca marca, SistemaOperativo so, Gama gama) {
         String modelo   = valTexto.validacion("Modelo: ");
@@ -149,20 +151,20 @@ public class Ingreso {
         Long stock      = valEntero.validacion("Stock: ");
         return new Celular(marca, modelo, precio, stock, so, gama);
     }
-
+    // esto para cosas como agregar, eliminar o editar celular o celular a una venta mas que nada
     public Long pedirIdCelular() {
         return valEntero.validacion("ID del celular: ");
     }
-
+    // para venta detalle
     public Long pedirCantidad() {
         return valEntero.validacion("Cantidad: ");
     }
-
+    //para quitar el objeto
     public int pedirItemAQuitar(int total) {
         return valRango.validacion("Numero del item a quitar: ", 1, total);
     }
 
-    // --- catalogos (marca, gama, so) ---
+    // para ingresar informacion de subtablas
 
     public Marca ingresarMarca() {
         return new Marca(valTexto.validacion("Nombre de la marca: "));

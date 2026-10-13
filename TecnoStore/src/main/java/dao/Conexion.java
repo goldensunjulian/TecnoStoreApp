@@ -18,14 +18,12 @@ public class Conexion {
             System.out.println("Error al conectar con la base de datos: " + e.getMessage());
         }
     }
-
     public static Conexion getInstance() {
         if (instancia == null) {
             instancia = new Conexion();
         }
         return instancia;
     }
-
     public static Connection conexion() {
         try {
             Conexion c = getInstance();

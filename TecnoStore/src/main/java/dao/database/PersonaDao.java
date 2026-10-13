@@ -75,7 +75,7 @@ public class PersonaDao implements InterfaceAgregar<Persona>, InterfaceActualiza
         return null;
     }
 
-    // busca por identi para saber si la persona ya existe antes de registrarla
+    // busca por identi para saber si la persona ya existe
     public Persona buscarPorIdentificacion(String identificacion) {
         String sql = "select * from persona where identificacion = ?";
         try (Connection c = Conexion.conexion()) {

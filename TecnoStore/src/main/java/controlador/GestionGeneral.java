@@ -1,16 +1,12 @@
 package controlador;
 
-import dao.database.EmpleadoDao;
 import modelo.entidades.Empleado;
-import vista.VistaLogin;
 
 public class GestionGeneral {
 
-    private final VistaLogin vistaLogin     = new VistaLogin();
-    private final EmpleadoDao empleadoDao   = new EmpleadoDao();
-
     public void menuGeneral() {
-        Empleado empleado = iniciarSesion();
+        // para ver y confirmar quien logea
+        Empleado empleado = new ControladorLogin().iniciarSesion();
 
         // redirigir segun privilegios del rol
         switch (empleado.getRol().getPrivilegios().intValue()) {
@@ -19,25 +15,5 @@ public class GestionGeneral {
             case 3 -> new GestionAdmin(empleado).menu();
             default -> System.out.println("Rol no reconocido.");
         }
-    }
-
-    private Empleado iniciarSesion() {
-        Empleado empleado = null;
-
-        do {
-            String username = vistaLogin.pedirUsername();
-            String password = vistaLogin.pedirPassword();
-
-            empleado = empleadoDao.buscarPorUsername(username);
-
-            if (empleado == null || !empleado.getContraseña().equals(password)) {
-                vistaLogin.mostrarErrorCredenciales();
-                empleado = null;
-            }
-
-        } while (empleado == null);
-
-        vistaLogin.mostrarBienvenida(empleado);
-        return empleado;
     }
 }

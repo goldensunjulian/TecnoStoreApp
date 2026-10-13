@@ -20,24 +20,24 @@ import modelo.entidades.Venta;
 import util.ArchivoUtils;
 import util.ReporteUtils;
 import vista.Ingreso;
-import vista.MostrarEmpleado;
-import vista.MostrarVenta;
+import vista.MostrarInformacion.MostrarEmpleado;
+import vista.MostrarInformacion.MostrarVenta;
 
 public class GestionAdmin {
 
-    private final Ingreso ingreso               = new Ingreso();
-    private final MostrarEmpleado mostrarEmp    = new MostrarEmpleado();
-    private final MostrarVenta mostrarVenta     = new MostrarVenta();
-    private final EmpleadoDao empleadoDao       = new EmpleadoDao();
-    private final PersonaDao personaDao         = new PersonaDao();
-    private final ClienteDao clienteDao         = new ClienteDao();
-    private final RolDao rolDao                 = new RolDao();
-    private final VentaDao ventaDao             = new VentaDao();
-    private final AuditoriaDao auditoriaDao     = new AuditoriaDao();
+    private final Ingreso ingreso = new Ingreso();
+    private final MostrarEmpleado mostrarEmp = new MostrarEmpleado();
+    private final MostrarVenta mostrarVenta = new MostrarVenta();
+    private final EmpleadoDao empleadoDao = new EmpleadoDao();
+    private final PersonaDao personaDao = new PersonaDao();
+    private final ClienteDao clienteDao = new ClienteDao();
+    private final RolDao rolDao = new RolDao();
+    private final VentaDao ventaDao = new VentaDao();
+    private final AuditoriaDao auditoriaDao = new AuditoriaDao();
 
     private final Empleado empleado;
-    private final CelularDao celularDao         = new CelularDao();
-    private final DetallesVentaDao detalleDao   = new DetallesVentaDao();
+    private final CelularDao celularDao = new CelularDao();
+    private final DetallesVentaDao detalleDao = new DetallesVentaDao();
 
     public GestionAdmin(Empleado empleado) {
         this.empleado = empleado;
@@ -80,7 +80,10 @@ public class GestionAdmin {
         if (persona == null) {
             System.out.println("Persona no encontrada. Ingrese los datos:");
             persona = ingreso.ingresarPersona(identificacion);
-            personaDao.agregar(persona);
+            if (!personaDao.agregar(persona)) {
+                System.out.println("No se pudo registrar la persona. El correo o identificacion ya existe.");
+                return;
+            }
         } else {
             System.out.println("Persona encontrada: " + persona.getNombre());
             // verificar que no sea ya un empleado
@@ -156,7 +159,7 @@ public class GestionAdmin {
     // reportes en consola usando Stream API
 
     private void mostrarReportesConsola() {
-        // --- Stock bajo ---
+        // stock bajo
         System.out.println("=== Celulares con stock bajo (menos de 5 unidades) ===");
         List<Celular> bajoStock = ReporteUtils.stockBajo(celularDao.listarTodo());
         if (bajoStock.isEmpty()) {
@@ -165,7 +168,7 @@ public class GestionAdmin {
             bajoStock.forEach(System.out::println);
         }
 
-        // --- Top 3 más vendidos ---
+        // top mas comprados vendidos XDXD
         System.out.println("=== Top 3 celulares mas vendidos ===");
         List<DetalleVenta> detalles = detalleDao.listarTodo();
         if (detalles.isEmpty()) {
@@ -174,11 +177,11 @@ public class GestionAdmin {
             List<Map.Entry<String, Long>> top3 = ReporteUtils.top3MasVendidos(detalles);
             int posicion = 1;
             for (Map.Entry<String, Long> entry : top3) {
-                System.out.println(posicion++ + ". " + entry.getKey() + " — " + entry.getValue() + " unidades vendidas");
+                System.out.println(posicion++ + ". " + entry.getKey() + " - " + entry.getValue() + " unidades vendidas");
             }
         }
 
-        // --- Ventas por mes ---
+        //venta del mes
         System.out.println("=== Ventas totales por mes ===");
         List<Venta> ventas = ventaDao.listarTodo();
         if (ventas.isEmpty()) {
@@ -202,7 +205,7 @@ public class GestionAdmin {
             return;
         }
         mostrarVenta.lista(ventas);
-        // ArchivoUtils genera el .txt
+        // ArchivoUtils genera el .txt porque ya es muy tarde para hacer un .dat y quemar mi vida en algo que realmente el proyecto no pidio ya que claramente decia .txt XDXD
         util.ArchivoUtils.generarReporte(ventas);
         auditoriaDao.agregar(new Auditoria("Admin genero reporte de ventas", empleado));
         System.out.println("Reporte generado en reporte_ventas.txt");

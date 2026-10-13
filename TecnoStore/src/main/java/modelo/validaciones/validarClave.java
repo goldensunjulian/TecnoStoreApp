@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class validarClave implements validacionInterface<String> {
 
     private static final int MIN = 6;
-    private static final int MAX = 45; // varchar(45) en la DB
+    private static final int MAX = 45;
 
     @Override
     public String validacion(String mensaje) {

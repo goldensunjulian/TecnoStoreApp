@@ -17,16 +17,16 @@ import modelo.entidades.Persona;
 import modelo.entidades.Venta;
 import modelo.excepciones.StockInsuficienteException;
 import vista.Ingreso;
-import vista.MostrarCelular;
+import vista.MostrarInformacion.MostrarCelular;
 
 public class GestionVendedor {
 
-    private final Ingreso ingreso           = new Ingreso();
+    private final Ingreso ingreso = new Ingreso();
     private final MostrarCelular mostrarCel = new MostrarCelular();
-    private final PersonaDao personaDao     = new PersonaDao();
-    private final ClienteDao clienteDao     = new ClienteDao();
-    private final CelularDao celularDao     = new CelularDao();
-    private final VentaDao ventaDao         = new VentaDao();
+    private final PersonaDao personaDao = new PersonaDao();
+    private final ClienteDao clienteDao = new ClienteDao();
+    private final CelularDao celularDao = new CelularDao();
+    private final VentaDao ventaDao = new VentaDao();
     private final DetallesVentaDao detalleDao = new DetallesVentaDao();
     private final AuditoriaDao auditoriaDao = new AuditoriaDao();
 
@@ -65,10 +65,13 @@ public class GestionVendedor {
         Persona persona = personaDao.buscarPorIdentificacion(identificacion);
 
         if (persona == null) {
-            // persona nueva — pedir datos y crear persona + cliente
+            // persona nueva, pedir datos y crear persona + cliente
             System.out.println("Persona no encontrada. Ingrese los datos:");
             persona = ingreso.ingresarPersona(identificacion);
-            personaDao.agregar(persona);
+            if (!personaDao.agregar(persona)) {
+                System.out.println("No se pudo registrar la persona. El correo o identificacion ya existe.");
+                return null;
+            }
             clienteDao.agregar(new Cliente(persona.getId(), persona.getNombre(),
                     persona.getIdentificador(), persona.getCorreo(), persona.getTelefono()));
             auditoriaDao.agregar(new Auditoria("Vendedor registro nuevo cliente: " + persona.getNombre(), empleado));

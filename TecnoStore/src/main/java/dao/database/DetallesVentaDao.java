@@ -117,8 +117,7 @@ public class DetallesVentaDao implements InterfaceAgregar<DetalleVenta>, Interfa
         return lista;
     }
 
-    // metodo privado para no repetir la construccion del objeto
-    // nota: la venta aqui es un objeto parcial con solo el id, suficiente para la referencia
+    // me evita repetir la armada en las otras consultas
     private DetalleVenta mapearDetalle(ResultSet rs) throws Exception {
         Marca marca = new Marca(rs.getLong("marca_id"), rs.getString("marca_nombre"));
         SistemaOperativo so = new SistemaOperativo(rs.getLong("so_id"), rs.getString("so_nombre"));

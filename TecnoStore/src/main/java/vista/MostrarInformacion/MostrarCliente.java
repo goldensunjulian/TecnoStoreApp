@@ -1,4 +1,4 @@
-package vista;
+package vista.MostrarInformacion;
 
 import java.util.List;
 import modelo.entidades.Cliente;

@@ -1,5 +1,7 @@
 -- MySQL Workbench Forward Engineering
 
+DROP DATABASE IF EXISTS `tecnostore`;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -221,3 +223,43 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Datos de prueba
+-- -----------------------------------------------------
+
+USE `tecnostore`;
+
+-- roles (privilegios: 1=vendedor, 2=bodega, 3=admin)
+INSERT INTO rol (rol, privilegios) VALUES ('Vendedor', 1);
+INSERT INTO rol (rol, privilegios) VALUES ('Admin Bodega', 2);
+INSERT INTO rol (rol, privilegios) VALUES ('Administrador', 3);
+
+-- personas
+INSERT INTO persona (nombre, identificacion, correo, telefono) VALUES ('Carlos Perez', '1001234567', 'carlos@mail.com', '3001234567');
+INSERT INTO persona (nombre, identificacion, correo, telefono) VALUES ('Ana Gomez', '1009876543', 'ana@mail.com', '3109876543');
+INSERT INTO persona (nombre, identificacion, correo, telefono) VALUES ('Luis Torres', '1005555555', 'luis@mail.com', '3205555555');
+
+-- empleados (carlos = vendedor, ana = bodega, luis = admin)
+INSERT INTO empleado (persona_fk, rol_fk, username, password) VALUES (1, 1, 'carlos', 'carlos123');
+INSERT INTO empleado (persona_fk, rol_fk, username, password) VALUES (2, 2, 'ana', 'ana12345');
+INSERT INTO empleado (persona_fk, rol_fk, username, password) VALUES (3, 3, 'luis', 'luis1234');
+
+-- marcas
+INSERT INTO marca (nombre) VALUES ('Samsung');
+INSERT INTO marca (nombre) VALUES ('Apple');
+INSERT INTO marca (nombre) VALUES ('Xiaomi');
+
+-- sistemas operativos
+INSERT INTO sistema_operativo (nombre) VALUES ('Android');
+INSERT INTO sistema_operativo (nombre) VALUES ('iOS');
+
+-- gamas
+INSERT INTO gama (nombre) VALUES ('Alta');
+INSERT INTO gama (nombre) VALUES ('Media');
+INSERT INTO gama (nombre) VALUES ('Baja');
+
+-- celulares
+INSERT INTO celular (marca_fk, modelo, precio, stock, sistema_operativo_fk, gama_fk) VALUES (1, 'Galaxy S24', 3500000, 10, 1, 1);
+INSERT INTO celular (marca_fk, modelo, precio, stock, sistema_operativo_fk, gama_fk) VALUES (2, 'iPhone 15', 4800000, 5, 2, 1);
+INSERT INTO celular (marca_fk, modelo, precio, stock, sistema_operativo_fk, gama_fk) VALUES (3, 'Redmi Note 13', 1200000, 20, 1, 3);

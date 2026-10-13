@@ -97,8 +97,8 @@ public class VentaDao implements InterfaceAgregar<Venta>, InterfaceBuscarPorId<V
         return lista;
     }
 
-    // metodo privado para no repetir la construccion del objeto en buscar y listar
-    private Venta mapearVenta(ResultSet rs) throws Exception {
+    // me evita repetir la armada en las otras consultas
+        private Venta mapearVenta(ResultSet rs) throws Exception {
         Cliente cliente = new Cliente(
                 rs.getLong("cliente_id"),
                 rs.getString("cliente_nombre"),

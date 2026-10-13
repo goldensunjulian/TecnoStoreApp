@@ -17,7 +17,7 @@ public class ArchivoUtils {
     // false en FileWriter sobreescribe el archivo si existe, lo crea si no
     public static void generarReporte(List<Venta> ventas) {
         // traer todos los detalles en una sola query y agruparlos por ventaId
-        // evita el problema N+1 (una query extra por cada venta)
+        // esto es evitar que si tengo mas de 100 ventas tenga que hacer 100 consultas mas los detalles que se triplica
         Map<Long, List<DetalleVenta>> detallesPorVenta = detalleDao.listarTodo()
                 .stream()
                 .collect(Collectors.groupingBy(d -> d.getVenta().getId()));

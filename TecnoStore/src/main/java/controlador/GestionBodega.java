@@ -12,17 +12,17 @@ import modelo.entidades.Gama;
 import modelo.entidades.Marca;
 import modelo.entidades.SistemaOperativo;
 import vista.Ingreso;
-import vista.MostrarCelular;
+import vista.MostrarInformacion.MostrarCelular;
 
 public class GestionBodega {
 
-    private final Ingreso ingreso             = new Ingreso();
-    private final MostrarCelular mostrarCel   = new MostrarCelular();
-    private final CelularDao celularDao       = new CelularDao();
-    private final MarcaDao marcaDao           = new MarcaDao();
-    private final GamaDao gamaDao             = new GamaDao();
-    private final SistemaOperativoDao soDao   = new SistemaOperativoDao();
-    private final AuditoriaDao auditoriaDao   = new AuditoriaDao();
+    private final Ingreso ingreso = new Ingreso();
+    private final MostrarCelular mostrarCel = new MostrarCelular();
+    private final CelularDao celularDao = new CelularDao();
+    private final MarcaDao marcaDao = new MarcaDao();
+    private final GamaDao gamaDao = new GamaDao();
+    private final SistemaOperativoDao soDao = new SistemaOperativoDao();
+    private final AuditoriaDao auditoriaDao = new AuditoriaDao();
 
     private final Empleado empleado;
 
@@ -44,7 +44,7 @@ public class GestionBodega {
         } while (op != 5);
     }
 
-    // --- celular ---
+    // gestionar celular
 
     private void menuCelular() {
         int op;
@@ -118,7 +118,7 @@ public class GestionBodega {
         System.out.println("Celular eliminado.");
     }
 
-    // --- marca ---
+    // gestionar marca
 
     private void menuMarca() {
         int op;
@@ -157,7 +157,7 @@ public class GestionBodega {
         } while (op != 5);
     }
 
-    // --- gama ---
+    // gestionar marca
 
     private void menuGama() {
         int op;
@@ -196,7 +196,7 @@ public class GestionBodega {
         } while (op != 5);
     }
 
-    // --- sistema operativo ---
+    // gestionar sistema operativo
 
     private void menuSO() {
         int op;

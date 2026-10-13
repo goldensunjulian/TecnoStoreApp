@@ -17,7 +17,7 @@ public class AuditoriaDao implements InterfaceAgregar<Auditoria>, InterfaceBusca
 
     @Override
     public Boolean agregar(Auditoria auditoria) {
-        // la fecha la pone la DB con DEFAULT CURRENT_TIMESTAMP, no se envia
+        // la fecha la pone la DB
         String sql = "insert into auditoria (accion, empleado_fk) values (?, ?)";
         try (Connection c = Conexion.conexion()) {
             PreparedStatement ps = c.prepareStatement(sql);
@@ -78,6 +78,7 @@ public class AuditoriaDao implements InterfaceAgregar<Auditoria>, InterfaceBusca
         return lista;
     }
 
+    // me evita repetir la armada en las otras consultas
     private Auditoria mapearAuditoria(ResultSet rs) throws Exception {
         Rol rol = new Rol(
                 rs.getLong("rol_id"),
